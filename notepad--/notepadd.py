@@ -13,11 +13,14 @@ class MainWindow(QMainWindow):
         saveAction.triggered.connect(self.saveFile)
         fontAction= QAction(QIcon("font.png"), 'Font', self)
         fontAction.triggered.connect(self.changeFont)
+        deleteAction = QAction(QIcon("bin.png"), 'Delete', self)
+        deleteAction.triggered.connect(self.deleteFunc)
         
         toolbar = self.addToolBar('Toolbar')
         toolbar.addAction(openAction)
         toolbar.addAction(saveAction)
         toolbar.addAction(fontAction)
+        toolbar.addAction(deleteAction)
 
         self.textEdit = QTextEdit()
         self.setCentralWidget(self.textEdit)
@@ -41,6 +44,9 @@ class MainWindow(QMainWindow):
         font, ok = QFontDialog.getFont()
         if ok:
             self.textEdit.setFont(font)
+    
+    def deleteFunc(self):
+        self.textEdit.setPlainText("")
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
